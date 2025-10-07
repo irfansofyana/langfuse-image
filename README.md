@@ -150,8 +150,8 @@ git push origin v1.0.0
 ```
 
 This will automatically build and publish images with the following tags:
-- `ghcr.io/<your-username>/langfuse-image:v1.0.0`
-- `ghcr.io/<your-username>/langfuse-image:1.0`
-- `ghcr.io/<your-username>/langfuse-image:1`
-- `ghcr.io/<your-username>/langfuse-image:latest` (if on main branch)
+- `ghcr.io/irfansofyana/langfuse-image:v1.0.0`
+- `ghcr.io/irfansofyana/langfuse-image:1.0`
+- `ghcr.io/irfansofyana/langfuse-image:1`
+- `ghcr.io/irfansofyana/langfuse-image:latest` (if on main branch)
 
