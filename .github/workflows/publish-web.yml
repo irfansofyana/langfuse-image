@@ -51,16 +51,12 @@ jobs:
           tags: |
             # Set latest tag for main branch
             type=raw,value=latest,enable={{is_default_branch}}
-            # Use semantic versioning for tags
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            # Use branch name
+            # Use exact tag name for version tags
+            type=ref,event=tag
+            # Use branch name for branch pushes
             type=ref,event=branch
-            # Use PR number
+            # Use PR number for pull requests
             type=ref,event=pr
-            # Use git SHA for commits
-            type=sha,prefix={{branch}}-
           labels: |
             org.opencontainers.image.title=Langfuse Vault
             org.opencontainers.image.description=Custom Langfuse Docker image with Vault secrets integration
