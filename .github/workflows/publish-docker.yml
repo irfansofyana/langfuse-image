@@ -10,10 +10,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      langfuse_version:
+        description: 'Langfuse version to use as base image'
+        required: false
+        default: '3.116'
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  LANGFUSE_VERSION: ${{ github.event.inputs.langfuse_version || '3.116' }}
 
 jobs:
   build-and-push:
@@ -67,6 +73,8 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            LANGFUSE_VERSION=${{ env.LANGFUSE_VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
