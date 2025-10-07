@@ -17,31 +17,24 @@ Custom Langfuse Docker image with Vault secrets integration.
 Pull the latest image directly from GHCR:
 
 ```bash
-docker pull ghcr.io/<your-github-username>/langfuse-image:latest
+docker pull ghcr.io/irfansofyana/langfuse-web:latest
 ```
 
-Or use a specific version (with Langfuse version tracking):
+Or use a specific version:
 
 ```bash
-# Pull a specific custom version with specific Langfuse version
-docker pull ghcr.io/<your-github-username>/langfuse-image:v1.0.0-langfuse3.116
-
-# Or pull by Langfuse version only (gets latest custom version)
-docker pull ghcr.io/<your-github-username>/langfuse-image:langfuse3.116
-
-# Or pull by custom version only
-docker pull ghcr.io/<your-github-username>/langfuse-image:v1.0.0
+docker pull ghcr.io/irfansofyana/langfuse-web:v1.0.0-langfuse3.116
 ```
 
 Then run it:
 
 ```bash
 docker run -d \
-  --name langfuse \
+  --name langfuse-web \
   -p 3000:3000 \
   -v /path/to/your/vault/secrets:/vault/secrets:ro \
   --restart unless-stopped \
-  ghcr.io/<your-github-username>/langfuse-image:latest
+  ghcr.io/irfansofyana/langfuse-web:latest
 ```
 
 ### Build the Image Locally
@@ -77,7 +70,7 @@ This will:
 #### Test 1: Run without vault secrets
 
 ```bash
-docker run --rm -p 3000:3000 langfuse-vault:3.116
+docker run --rm -p 3000:3000 langfuse-web:3.116
 ```
 
 #### Test 2: Run with test vault secrets
@@ -86,7 +79,7 @@ docker run --rm -p 3000:3000 langfuse-vault:3.116
 cd langfuse-web
 docker run --rm -p 3000:3000 \
   -v "$(pwd)/test-secrets:/vault/secrets:ro" \
-  langfuse-vault:3.116
+  langfuse-web:3.116
 ```
 
 #### Test 3: Check if environment variables are loaded
@@ -95,7 +88,7 @@ docker run --rm -p 3000:3000 \
 cd langfuse-web
 docker run --rm \
   -v "$(pwd)/test-secrets:/vault/secrets:ro" \
-  langfuse-vault:3.116 \
+  langfuse-web:3.116 \
   sh -c 'env | grep DATABASE_URL'
 ```
 
@@ -109,7 +102,7 @@ You can use a custom path by setting the `VAULT_SECRETS_DIRECTORY` environment v
 docker run --rm -p 3000:3000 \
   -e VAULT_SECRETS_DIRECTORY=/custom/path \
   -v /your/secrets/path:/custom/path:ro \
-  langfuse-vault:3.116
+  langfuse-web:3.116
 ```
 
 ## How It Works

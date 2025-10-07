@@ -87,16 +87,16 @@ Each version creates multiple tags in GHCR for easier consumption:
 
 ### From Git Tag: `v1.2.3-langfuse3.116`
 Publishes as:
-- `ghcr.io/yourusername/langfuse-image:v1.2.3-langfuse3.116` (full version)
-- `ghcr.io/yourusername/langfuse-image:v1.2.3` (custom version only)
-- `ghcr.io/yourusername/langfuse-image:v1.2` (major.minor)
-- `ghcr.io/yourusername/langfuse-image:v1` (major)
-- `ghcr.io/yourusername/langfuse-image:latest` (on main branch)
-- `ghcr.io/yourusername/langfuse-image:langfuse3.116` (Langfuse version)
+- `ghcr.io/irfansofyana/langfuse-web:v1.2.3-langfuse3.116` (full version)
+- `ghcr.io/irfansofyana/langfuse-web:v1.2.3` (custom version only)
+- `ghcr.io/irfansofyana/langfuse-web:v1.2` (major.minor)
+- `ghcr.io/irfansofyana/langfuse-web:v1` (major)
+- `ghcr.io/irfansofyana/langfuse-web:latest` (on main branch)
+- `ghcr.io/irfansofyana/langfuse-web:langfuse3.116` (Langfuse version)
 
 ### From Branch Push: `main`
-- `ghcr.io/yourusername/langfuse-image:main`
-- `ghcr.io/yourusername/langfuse-image:latest`
+- `ghcr.io/irfansofyana/langfuse-web:main`
+- `ghcr.io/irfansofyana/langfuse-web:latest`
 
 ## Docker Image Labels
 
@@ -129,11 +129,11 @@ grep "ARG LANGFUSE_VERSION" langfuse-web/Dockerfile
 ### Published Images
 ```bash
 # List all published tags
-docker pull ghcr.io/yourusername/langfuse-image:latest
-docker image inspect ghcr.io/yourusername/langfuse-image:latest | jq '.[0].Config.Labels'
+docker pull ghcr.io/irfansofyana/langfuse-web:latest
+docker image inspect ghcr.io/irfansofyana/langfuse-web:latest | jq '.[0].Config.Labels'
 
 # Check specific version
-docker pull ghcr.io/yourusername/langfuse-image:v1.0.0-langfuse3.116
+docker pull ghcr.io/irfansofyana/langfuse-web:v1.0.0-langfuse3.116
 ```
 
 ## Migration Between Versions
@@ -150,7 +150,7 @@ To rollback to a previous version:
 
 ```bash
 # Pull the previous version
-docker pull ghcr.io/yourusername/langfuse-image:v1.0.0-langfuse3.115
+docker pull ghcr.io/irfansofyana/langfuse-web:v1.0.0-langfuse3.115
 
 # Update your deployment to use the older tag
 # OR locally checkout the tag and rebuild

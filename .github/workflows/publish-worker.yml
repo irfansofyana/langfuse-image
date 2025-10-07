@@ -1,4 +1,4 @@
-name: Build and Publish Docker Images
+name: Build and Publish Langfuse Worker
 
 on:
   push:
@@ -18,7 +18,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository_owner }}/langfuse-worker
   LANGFUSE_VERSION: ${{ github.event.inputs.langfuse_version || '3.116' }}
 
 jobs:
@@ -50,26 +50,22 @@ jobs:
           tags: |
             # Set latest tag for main branch
             type=raw,value=latest,enable={{is_default_branch}}
-            # Use semantic versioning for tags
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            # Use branch name
+            # Use exact tag name for version tags
+            type=ref,event=tag
+            # Use branch name for branch pushes
             type=ref,event=branch
-            # Use PR number
+            # Use PR number for pull requests
             type=ref,event=pr
-            # Use git SHA for commits
-            type=sha,prefix={{branch}}-
           labels: |
-            org.opencontainers.image.title=Langfuse Vault
-            org.opencontainers.image.description=Custom Langfuse Docker image with Vault secrets integration
+            org.opencontainers.image.title=Langfuse Worker Vault
+            org.opencontainers.image.description=Custom Langfuse Worker Docker image with Vault secrets integration
             org.opencontainers.image.vendor=${{ github.repository_owner }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./langfuse-web
-          file: ./langfuse-web/Dockerfile
+          context: ./langfuse-worker
+          file: ./langfuse-worker/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -86,4 +82,3 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-
