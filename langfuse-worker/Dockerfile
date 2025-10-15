@@ -1,5 +1,5 @@
 # Use the official Langfuse image as base
-ARG LANGFUSE_VERSION=3.116
+ARG LANGFUSE_VERSION=3.116.0
 FROM langfuse/langfuse-worker:${LANGFUSE_VERSION}
 
 # Switch to root user to make changes
