@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default Langfuse version
-LANGFUSE_VERSION=${1:-3.116}
+LANGFUSE_VERSION=${1:-3.116.0}
 
 # Build the custom Langfuse worker image with vault integration
 docker build \
